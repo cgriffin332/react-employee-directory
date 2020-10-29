@@ -20,40 +20,39 @@ class Table extends Component {
       .catch((err) => console.log(err));
   }
 
-  sortLast() {
-    this.state.employeeData.sort((a, b) =>
-      a.name.last > b.name.last ? 1 : b.name.last > a.name.last ? -1 : 0
-    );
-  }
-
   render() {
     return (
-      <table className="table table-striped">
-        <thead>
-          <tr>
-            <th scope="col">Image</th>
-            <th scope="col">
-              First
-            </th>
-            <th onClick={this.sortLast()} scope="col">Last</th>
-            <th scope="col">Phone</th>
-            <th scope="col">Email</th>
-          </tr>
-        </thead>
-        <tbody>
-          {this.state.employeeData.map((employee, index) => (
-            <tr key={index}>
-              <td>
-                <img alt="employee" src={employee.picture.thumbnail}></img>
-              </td>
-              <td>{employee.name.first}</td>
-              <td>{employee.name.last}</td>
-              <td>{employee.phone}</td>
-              <td>{employee.email}</td>
+      <>
+        <input
+          onChange={(event) => {
+            this.setState({ searchValue: event.target.value });
+          }}
+        ></input>
+        <table className="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">Image</th>
+              <th scope="col">First</th>
+              <th scope="col">Last</th>
+              <th scope="col">Phone</th>
+              <th scope="col">Email</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {this.state.employeeData.map((employee, index) => (
+              <tr key={index}>
+                <td>
+                  <img alt="employee" src={employee.picture.thumbnail}></img>
+                </td>
+                <td>{employee.name.first}</td>
+                <td>{employee.name.last}</td>
+                <td>{employee.phone}</td>
+                <td>{employee.email}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </>
     );
   }
 }
