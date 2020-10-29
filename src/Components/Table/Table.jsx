@@ -9,7 +9,6 @@ class Table extends Component {
 
   componentDidMount() {
     this.getEmployees();
-    console.log(this);
   }
 
   getEmployees() {
