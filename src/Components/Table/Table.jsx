@@ -3,12 +3,17 @@ import axios from "axios";
 
 class Table extends Component {
 
+    state = {
+        employeeData: [],
+        searchValue: ""
+      }
+
   componentDidMount() {
     axios
       .get("https://randomuser.me/api/?results=200&nat=us")
       .then((response) => {
         this.setState({ employeeData: response.data.results });
-      });
+      }).catch(err => console.log(err));
   }
 
   render() {
