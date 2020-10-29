@@ -39,17 +39,23 @@ class Table extends Component {
             </tr>
           </thead>
           <tbody>
-            {this.state.employeeData.map((employee, index) => (
-              <tr key={index}>
-                <td>
-                  <img alt="employee" src={employee.picture.thumbnail}></img>
-                </td>
-                <td>{employee.name.first}</td>
-                <td>{employee.name.last}</td>
-                <td>{employee.phone}</td>
-                <td>{employee.email}</td>
-              </tr>
-            ))}
+            {this.state.employeeData
+              .filter((employee) =>
+                employee.name.last
+                  .toLowerCase()
+                  .startsWith(this.state.searchValue.toLowerCase())
+              )
+              .map((employee, index) => (
+                <tr key={index}>
+                  <td>
+                    <img alt="employee" src={employee.picture.thumbnail}></img>
+                  </td>
+                  <td>{employee.name.first}</td>
+                  <td>{employee.name.last}</td>
+                  <td>{employee.phone}</td>
+                  <td>{employee.email}</td>
+                </tr>
+              ))}
           </tbody>
         </table>
       </>
