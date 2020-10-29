@@ -9,6 +9,7 @@ class Table extends Component {
 
   componentDidMount() {
     this.getEmployees();
+    console.log(this);
   }
 
   getEmployees() {
@@ -26,9 +27,9 @@ class Table extends Component {
         <div className="row">
           <div className="col-4"></div>
           <div className="col-4">
-            <label>Search Employees:</label>
+            <p className="text-center" >Search Employees:</p>
             <input
-              className="form-control"
+              className="form-control mb-4"
               onChange={(event) => {
                 this.setState({ searchValue: event.target.value });
               }}
