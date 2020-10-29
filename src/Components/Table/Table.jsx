@@ -16,6 +16,17 @@ class Table extends Component {
       .get("https://randomuser.me/api/?results=200&nat=us")
       .then((response) => {
         this.setState({ employeeData: response.data.results });
+        console.log(
+          this.state.employeeData.sort(function (a, b) {
+            if (a.name.first < b.name.first) {
+              return -1;
+            }
+            if (a.name.first > b.name.first) {
+              return 1;
+            }
+            return 0;
+          })
+        );
       })
       .catch((err) => console.log(err));
   }
@@ -26,7 +37,7 @@ class Table extends Component {
         <div className="row">
           <div className="col-4"></div>
           <div className="col-4">
-            <p className="text-center" >Search Employees:</p>
+            <p className="text-center">Search Employees:</p>
             <input
               className="form-control mb-4"
               onChange={(event) => {
