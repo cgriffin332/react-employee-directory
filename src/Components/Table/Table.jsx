@@ -8,6 +8,10 @@ class Table extends Component {
   };
 
   componentDidMount() {
+    this.getEmployees();
+  }
+
+  getEmployees() {
     axios
       .get("https://randomuser.me/api/?results=200&nat=us")
       .then((response) => {
@@ -29,18 +33,17 @@ class Table extends Component {
           </tr>
         </thead>
         <tbody>
-          {this.state.employeeData
-            .map((employee, index) => (
-              <tr key={index}>
-                <td>
-                  <img alt="employee" src={employee.picture.thumbnail}></img>
-                </td>
-                <td>{employee.name.first}</td>
-                <td>{employee.name.last}</td>
-                <td>{employee.phone}</td>
-                <td>{employee.email}</td>
-              </tr>
-            ))}
+          {this.state.employeeData.map((employee, index) => (
+            <tr key={index}>
+              <td>
+                <img alt="employee" src={employee.picture.thumbnail}></img>
+              </td>
+              <td>{employee.name.first}</td>
+              <td>{employee.name.last}</td>
+              <td>{employee.phone}</td>
+              <td>{employee.email}</td>
+            </tr>
+          ))}
         </tbody>
       </table>
     );
