@@ -1,19 +1,15 @@
 import React, { Component } from "react";
-import API from "../utils/API";
+import axios from "axios";
 
 class Table extends Component {
-    
-  componentDidMount() {
-    this.getEmployees();
-  }
 
-  getEmployees = () => {
-    API.search()
+  componentDidMount() {
+    axios
+      .get("https://randomuser.me/api/?results=200&nat=us")
       .then((response) => {
         this.setState({ employeeData: response.data.results });
-      })
-      .catch((err) => console.log(err));
-  };
+      });
+  }
 
   render() {
     return (
