@@ -2,18 +2,18 @@ import React, { Component } from "react";
 import axios from "axios";
 
 class Table extends Component {
-
-    state = {
-        employeeData: [],
-        searchValue: ""
-      }
+  state = {
+    employeeData: [],
+    searchValue: "",
+  };
 
   componentDidMount() {
     axios
       .get("https://randomuser.me/api/?results=200&nat=us")
       .then((response) => {
         this.setState({ employeeData: response.data.results });
-      }).catch(err => console.log(err));
+      })
+      .catch((err) => console.log(err));
   }
 
   render() {
@@ -29,15 +29,18 @@ class Table extends Component {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>
-              <img alt="employee" src="http://www.fillmurray.com/100/100"></img>
-            </td>
-            <td>Bill</td>
-            <td>Murray</td>
-            <td>123-456-7890</td>
-            <td>www.billmurray@gmail.com</td>
-          </tr>
+          {this.state.employeeData
+            .map((employee, index) => (
+              <tr key={index}>
+                <td>
+                  <img alt="employee" src={employee.picture.thumbnail}></img>
+                </td>
+                <td>{employee.name.first}</td>
+                <td>{employee.name.last}</td>
+                <td>{employee.phone}</td>
+                <td>{employee.email}</td>
+              </tr>
+            ))}
         </tbody>
       </table>
     );
