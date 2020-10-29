@@ -2,6 +2,19 @@ import React, { Component } from "react";
 import API from "../utils/API";
 
 class Table extends Component {
+    
+  componentDidMount() {
+    this.getEmployees();
+  }
+
+  getEmployees = () => {
+    API.search()
+      .then((response) => {
+        this.setState({ employeeData: response.data.results });
+      })
+      .catch((err) => console.log(err));
+  };
+
   render() {
     return (
       <table className="table table-striped">
