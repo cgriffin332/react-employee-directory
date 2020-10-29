@@ -20,14 +20,22 @@ class Table extends Component {
       .catch((err) => console.log(err));
   }
 
+  sortLast() {
+    this.state.employeeData.sort((a, b) =>
+      a.name.last > b.name.last ? 1 : b.name.last > a.name.last ? -1 : 0
+    );
+  }
+
   render() {
     return (
       <table className="table table-striped">
         <thead>
           <tr>
             <th scope="col">Image</th>
-            <th scope="col">First</th>
-            <th scope="col">Last</th>
+            <th scope="col">
+              First
+            </th>
+            <th onClick={this.sortLast()} scope="col">Last</th>
             <th scope="col">Phone</th>
             <th scope="col">Email</th>
           </tr>
