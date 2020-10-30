@@ -73,11 +73,11 @@ class Table extends Component {
               <thead>
                 <tr>
                   <th scope="col">Image</th>
-                  <th onClick={this.sortFirst} scope="col">
-                    First
+                  <th scope="col">
+                    First<span onClick={this.sortFirst}> (↑)</span><span> (↓)</span>
                   </th>
-                  <th onClick={this.sortLast} scope="col">
-                    Last
+                  <th scope="col">
+                    Last<span onClick={this.sortLast}> (↑)</span><span> (↓)</span>
                   </th>
                   <th scope="col">Phone</th>
                   <th scope="col">Email</th>
