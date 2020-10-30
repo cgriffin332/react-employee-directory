@@ -4,14 +4,13 @@ import axios from "axios";
 class Table extends Component {
   state = {
     employeeData: [],
-    sortedFirst: [],
     searchValue: "",
   };
 
   componentDidMount() {
     this.getEmployees();
   }
-
+  // axios call to get all employees and set state
   getEmployees = () => {
     axios
       .get("https://randomuser.me/api/?results=200&nat=us")
@@ -22,7 +21,7 @@ class Table extends Component {
       })
       .catch((err) => console.log(err));
   };
-
+  // sort by first name a-z
   sortFirstA = () => {
     this.setState({
       employeeData: this.state.employeeData.sort(function (a, b) {
@@ -36,7 +35,7 @@ class Table extends Component {
       }),
     });
   };
-
+  //sort by first name z-a
   sortFirstZ = () => {
     this.setState({
       employeeData: this.state.employeeData.sort(function (a, b) {
@@ -50,7 +49,7 @@ class Table extends Component {
       }),
     });
   };
-
+  //sort bl last name a-z
   sortLastA = () => {
     this.setState({
       employeeData: this.state.employeeData.sort(function (a, b) {
@@ -64,7 +63,7 @@ class Table extends Component {
       }),
     });
   };
-
+  //sort by last name z-a
   sortLastZ = () => {
     this.setState({
       employeeData: this.state.employeeData.sort(function (a, b) {
@@ -102,10 +101,12 @@ class Table extends Component {
                 <tr>
                   <th scope="col">Image</th>
                   <th scope="col">
-                    First<span onClick={this.sortFirstA}> (↑)</span><span onClick={this.sortFirstZ}> (↓)</span>
+                    First<span onClick={this.sortFirstA}> (↑)</span>
+                    <span onClick={this.sortFirstZ}> (↓)</span>
                   </th>
                   <th scope="col">
-                    Last<span onClick={this.sortLastA}> (↑)</span><span onClick={this.sortLastZ}> (↓)</span>
+                    Last<span onClick={this.sortLastA}> (↑)</span>
+                    <span onClick={this.sortLastZ}> (↓)</span>
                   </th>
                   <th scope="col">Phone</th>
                   <th scope="col">Email</th>
