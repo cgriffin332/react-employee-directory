@@ -24,22 +24,17 @@ class Table extends Component {
   };
 
   sortFirst = () => {
-    axios
-      .get("https://randomuser.me/api/?results=200&nat=us")
-      .then((response) => {
-        this.setState({
-          employeeData: response.data.results.sort(function (a, b) {
-            if (a.name.first < b.name.first) {
-              return -1;
-            }
-            if (a.name.first > b.name.first) {
-              return 1;
-            }
-            return 0;
-          }),
-        });
-      })
-      .catch((err) => console.log(err));
+    this.setState({
+      employeeData: this.state.employeeData.sort(function (a, b) {
+        if (a.name.first < b.name.first) {
+          return -1;
+        }
+        if (a.name.first > b.name.first) {
+          return 1;
+        }
+        return 0;
+      }),
+    });
   };
 
   sortLast = () => {
@@ -55,21 +50,6 @@ class Table extends Component {
       }),
     });
   };
-
-  //   sortFirst(){
-  //       console.log()
-  //       const sorted = this.state.employeeData.sort(function (a, b) {
-  //         if (a.name.first < b.name.first) {
-  //           return -1;
-  //         }
-  //         if (a.name.first > b.name.first) {
-  //           return 1;
-  //         }
-  //         return 0;
-  //       });
-  //     this.setState({ employeeData: sorted });
-
-  //   }
 
   render() {
     return (
