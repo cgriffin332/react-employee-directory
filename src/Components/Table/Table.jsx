@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import moment from "moment";
 import "./Table.css";
-
+import Search from "../Search/Search";
 
 class Table extends Component {
   state = {
@@ -116,19 +116,11 @@ class Table extends Component {
   render() {
     return (
       <>
-        <div className="row">
-          <div className="col-4"></div>
-          <div className="col-4">
-            <p className="text-center">Search Employee's Last Name:</p>
-            <input
-              className="form-control mb-4"
-              onChange={(event) => {
-                this.setState({ searchValue: event.target.value });
-              }}
-            ></input>
-          </div>
-          <div className="col-4"></div>
-        </div>
+        <Search
+          onChange={(event) => {
+            this.setState({ searchValue: event.target.value });
+          }}
+        />
         <div className="row">
           <div className="col">
             <table className="table table-striped text-center">
