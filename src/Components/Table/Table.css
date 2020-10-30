@@ -1,0 +1,8 @@
+.row {
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.table-striped > tbody > tr:nth-child(2n+1) > td {
+    background-color: #e4e4e4;
+}
+
