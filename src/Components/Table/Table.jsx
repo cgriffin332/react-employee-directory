@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import axios from "axios";
 import moment from "moment";
+import "./Table.css";
+
 
 class Table extends Component {
   state = {
@@ -11,6 +13,7 @@ class Table extends Component {
   componentDidMount() {
     this.getEmployees();
   }
+
   // axios call to get all employees and set state
   getEmployees = () => {
     axios
@@ -22,6 +25,37 @@ class Table extends Component {
       })
       .catch((err) => console.log(err));
   };
+
+  // sort by birth date oldest
+  sortDateO = () => {
+    this.setState({
+      employeeData: this.state.employeeData.sort(function (a, b) {
+        if (a.dob.date < b.dob.date) {
+          return -1;
+        }
+        if (a.dob.date > b.dob.date) {
+          return 1;
+        }
+        return 0;
+      }),
+    });
+  };
+
+  // sort by birth date youngest
+  sortDateY = () => {
+    this.setState({
+      employeeData: this.state.employeeData.sort(function (a, b) {
+        if (a.dob.date < b.dob.date) {
+          return 1;
+        }
+        if (a.dob.date > b.dob.date) {
+          return -1;
+        }
+        return 0;
+      }),
+    });
+  };
+
   // sort by first name a-z
   sortFirstA = () => {
     this.setState({
@@ -78,34 +112,7 @@ class Table extends Component {
       }),
     });
   };
-// sort by birth date youngest
-  sortDateY = () => {
-    this.setState({
-      employeeData: this.state.employeeData.sort(function (a, b) {
-        if (a.dob.date < b.dob.date) {
-          return 1;
-        }
-        if (a.dob.date > b.dob.date) {
-          return -1;
-        }
-        return 0;
-      }),
-    });
-  };
-// sort by birth date oldest
-sortDateO = () => {
-  this.setState({
-    employeeData: this.state.employeeData.sort(function (a, b) {
-      if (a.dob.date < b.dob.date) {
-        return -1;
-      }
-      if (a.dob.date > b.dob.date) {
-        return 1;
-      }
-      return 0;
-    }),
-  });
-};
+
   render() {
     return (
       <>
@@ -138,7 +145,10 @@ sortDateO = () => {
                   </th>
                   <th scope="col">Phone</th>
                   <th scope="col">Email</th>
-                  <th scope="col">DOB<span onClick={this.sortDateY}> (↑)</span><span onClick={this.sortDateO}> (↓)</span></th>
+                  <th scope="col">
+                    DOB<span onClick={this.sortDateY}> (↑)</span>
+                    <span onClick={this.sortDateO}> (↓)</span>
+                  </th>
                 </tr>
               </thead>
               <tbody>
@@ -160,7 +170,7 @@ sortDateO = () => {
                       <td>{employee.name.last}</td>
                       <td>{employee.phone}</td>
                       <td>{employee.email}</td>
-                      <td>{moment(employee.dob.date).format('MM/DD/YYYY')}</td>
+                      <td>{moment(employee.dob.date).format("MM/DD/YYYY")}</td>
                     </tr>
                   ))}
               </tbody>
