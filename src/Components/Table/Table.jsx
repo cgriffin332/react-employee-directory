@@ -65,13 +65,27 @@ class Table extends Component {
     });
   };
 
+  sortLastZ = () => {
+    this.setState({
+      employeeData: this.state.employeeData.sort(function (a, b) {
+        if (a.name.last < b.name.last) {
+          return 1;
+        }
+        if (a.name.last > b.name.last) {
+          return -1;
+        }
+        return 0;
+      }),
+    });
+  };
+
   render() {
     return (
       <>
         <div className="row">
           <div className="col-4"></div>
           <div className="col-4">
-            <p className="text-center">Search Employees:</p>
+            <p className="text-center">Search Employee's Last Name:</p>
             <input
               className="form-control mb-4"
               onChange={(event) => {
@@ -91,7 +105,7 @@ class Table extends Component {
                     First<span onClick={this.sortFirstA}> (↑)</span><span onClick={this.sortFirstZ}> (↓)</span>
                   </th>
                   <th scope="col">
-                    Last<span onClick={this.sortLastA}> (↑)</span><span> (↓)</span>
+                    Last<span onClick={this.sortLastA}> (↑)</span><span onClick={this.sortLastZ}> (↓)</span>
                   </th>
                   <th scope="col">Phone</th>
                   <th scope="col">Email</th>
