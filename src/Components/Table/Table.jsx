@@ -21,7 +21,7 @@ class Table extends Component {
         });
       })
       .catch((err) => console.log(err));
-  }
+  };
 
   sortFirst = () => {
     axios
@@ -40,9 +40,21 @@ class Table extends Component {
         });
       })
       .catch((err) => console.log(err));
-  }
+  };
 
-  
+  sortLast = () => {
+    this.setState({
+      employeeData: this.state.employeeData.sort(function (a, b) {
+        if (a.name.last < b.name.last) {
+          return -1;
+        }
+        if (a.name.last > b.name.last) {
+          return 1;
+        }
+        return 0;
+      }),
+    });
+  };
 
   //   sortFirst(){
   //       console.log()
@@ -81,8 +93,12 @@ class Table extends Component {
               <thead>
                 <tr>
                   <th scope="col">Image</th>
-                  <th onClick={this.sortFirst} scope="col">First</th>
-                  <th scope="col">Last</th>
+                  <th onClick={this.sortFirst} scope="col">
+                    First
+                  </th>
+                  <th onClick={this.sortLast} scope="col">
+                    Last
+                  </th>
                   <th scope="col">Phone</th>
                   <th scope="col">Email</th>
                 </tr>
