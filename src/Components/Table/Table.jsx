@@ -4,6 +4,7 @@ import axios from "axios";
 class Table extends Component {
   state = {
     employeeData: [],
+    sortedFirst: [],
     searchValue: "",
   };
 
@@ -11,13 +12,23 @@ class Table extends Component {
     this.getEmployees();
   }
 
-  getEmployees() {
+  getEmployees = () => {
     axios
       .get("https://randomuser.me/api/?results=200&nat=us")
       .then((response) => {
-        this.setState({ employeeData: response.data.results });
-        console.log(
-          this.state.employeeData.sort(function (a, b) {
+        this.setState({
+          employeeData: response.data.results,
+        });
+      })
+      .catch((err) => console.log(err));
+  }
+
+  sortFirst = () => {
+    axios
+      .get("https://randomuser.me/api/?results=200&nat=us")
+      .then((response) => {
+        this.setState({
+          employeeData: response.data.results.sort(function (a, b) {
             if (a.name.first < b.name.first) {
               return -1;
             }
@@ -25,11 +36,28 @@ class Table extends Component {
               return 1;
             }
             return 0;
-          })
-        );
+          }),
+        });
       })
       .catch((err) => console.log(err));
   }
+
+  
+
+  //   sortFirst(){
+  //       console.log()
+  //       const sorted = this.state.employeeData.sort(function (a, b) {
+  //         if (a.name.first < b.name.first) {
+  //           return -1;
+  //         }
+  //         if (a.name.first > b.name.first) {
+  //           return 1;
+  //         }
+  //         return 0;
+  //       });
+  //     this.setState({ employeeData: sorted });
+
+  //   }
 
   render() {
     return (
@@ -53,7 +81,7 @@ class Table extends Component {
               <thead>
                 <tr>
                   <th scope="col">Image</th>
-                  <th scope="col">First</th>
+                  <th onClick={this.sortFirst} scope="col">First</th>
                   <th scope="col">Last</th>
                   <th scope="col">Phone</th>
                   <th scope="col">Email</th>
