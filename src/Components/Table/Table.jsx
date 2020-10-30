@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import moment from "moment";
 
 class Table extends Component {
   state = {
@@ -77,7 +78,34 @@ class Table extends Component {
       }),
     });
   };
-
+// sort by birth date youngest
+  sortDateY = () => {
+    this.setState({
+      employeeData: this.state.employeeData.sort(function (a, b) {
+        if (a.dob.date < b.dob.date) {
+          return 1;
+        }
+        if (a.dob.date > b.dob.date) {
+          return -1;
+        }
+        return 0;
+      }),
+    });
+  };
+// sort by birth date oldest
+sortDateO = () => {
+  this.setState({
+    employeeData: this.state.employeeData.sort(function (a, b) {
+      if (a.dob.date < b.dob.date) {
+        return -1;
+      }
+      if (a.dob.date > b.dob.date) {
+        return 1;
+      }
+      return 0;
+    }),
+  });
+};
   render() {
     return (
       <>
@@ -96,7 +124,7 @@ class Table extends Component {
         </div>
         <div className="row">
           <div className="col">
-            <table className="table table-striped">
+            <table className="table table-striped text-center">
               <thead>
                 <tr>
                   <th scope="col">Image</th>
@@ -110,6 +138,7 @@ class Table extends Component {
                   </th>
                   <th scope="col">Phone</th>
                   <th scope="col">Email</th>
+                  <th scope="col">DOB<span onClick={this.sortDateY}> (↑)</span><span onClick={this.sortDateO}> (↓)</span></th>
                 </tr>
               </thead>
               <tbody>
@@ -131,6 +160,7 @@ class Table extends Component {
                       <td>{employee.name.last}</td>
                       <td>{employee.phone}</td>
                       <td>{employee.email}</td>
+                      <td>{moment(employee.dob.date).format('MM/DD/YYYY')}</td>
                     </tr>
                   ))}
               </tbody>
