@@ -23,7 +23,7 @@ class Table extends Component {
       .catch((err) => console.log(err));
   };
 
-  sortFirst = () => {
+  sortFirstA = () => {
     this.setState({
       employeeData: this.state.employeeData.sort(function (a, b) {
         if (a.name.first < b.name.first) {
@@ -37,7 +37,21 @@ class Table extends Component {
     });
   };
 
-  sortLast = () => {
+  sortFirstZ = () => {
+    this.setState({
+      employeeData: this.state.employeeData.sort(function (a, b) {
+        if (a.name.first < b.name.first) {
+          return 1;
+        }
+        if (a.name.first > b.name.first) {
+          return -1;
+        }
+        return 0;
+      }),
+    });
+  };
+
+  sortLastA = () => {
     this.setState({
       employeeData: this.state.employeeData.sort(function (a, b) {
         if (a.name.last < b.name.last) {
@@ -74,10 +88,10 @@ class Table extends Component {
                 <tr>
                   <th scope="col">Image</th>
                   <th scope="col">
-                    First<span onClick={this.sortFirst}> (↑)</span><span> (↓)</span>
+                    First<span onClick={this.sortFirstA}> (↑)</span><span onClick={this.sortFirstZ}> (↓)</span>
                   </th>
                   <th scope="col">
-                    Last<span onClick={this.sortLast}> (↑)</span><span> (↓)</span>
+                    Last<span onClick={this.sortLastA}> (↑)</span><span> (↓)</span>
                   </th>
                   <th scope="col">Phone</th>
                   <th scope="col">Email</th>
