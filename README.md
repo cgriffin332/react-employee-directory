@@ -16,7 +16,8 @@ For this project, I have created an employee directory with React. I have broken
 
 ## Installation
 
-Simply click the link.
+Simply click the link.<br />
+https://cgriffin332.github.io/react-employee-directory/
 
 ## Usage
 
